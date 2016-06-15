@@ -1,5 +1,6 @@
 require "carrierwave/qcloud/version"
 require "carrierwave/qcloud/configuration"
+require 'carrierwave/storage/qcloud'
 
 module Carrierwave
   module Qcloud
