@@ -1,8 +1,6 @@
 # Carrierwave::Qcloud
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/carrierwave/qcloud`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem adds storage support for [Qcloud COS](https://www.qcloud.com/doc/product/227/%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D) to [CarrierWave](https://github.com/carrierwaveuploader/carrierwave)
 
 ## Installation
 
@@ -22,7 +20,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You'll need to configure the to use this in config/initializes/carrierwave.rb
+
+```ruby
+CarrierWave.configure do |config|
+  #config.storage           = :qcloud # set default storage
+  config.qcloud_app_id     = 'xxxxxx'
+  config.qcloud_secret_id  = 'xxxxxx'
+  config.qcloud_secret_key = 'xxxxxx'
+  config.qcloud_bucket     = "bucketname"
+end
+```
+
+If dont want to use `qcloud` as default storage, just set the storage to `:qcloud` in the specified uploader:
+
+```ruby
+class AvatarUploader < CarrierWave::Uploader::Base
+  storage :qcloud
+end
+```
+
+You can override configuration item in individual uploader like this:
+
+```ruby
+class AvatarUploader < CarrierWave::Uploader::Base
+  storage :qcloud
+
+  self.qcloud_bucket = "avatars"
+end
+```
 
 ## Development
 
@@ -32,5 +58,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/carrierwave-qcloud.
+Bug reports and pull requests are welcome on GitHub at https://github.com/rainchen/carrierwave-qcloud.
 
